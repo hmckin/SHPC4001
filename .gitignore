@@ -1,8 +1,9 @@
 # Ignore everything
 *
 
-# Allow the .gitignore file
+# Allow the .gitignore and README files
 !.gitignore
+!README.md
 
 # Allow Assignment 1/Code
 !Assignment 1/
