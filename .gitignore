@@ -1,0 +1,37 @@
+# Ignore everything
+*
+
+# Allow the .gitignore file
+!.gitignore
+
+# Allow Assignment 1/Code
+!Assignment 1/
+Assignment 1/*
+!Assignment 1/Code/
+!Assignment 1/Code/**
+
+# Allow Assignment 2/Code
+!Assignment 2/
+Assignment 2/*
+!Assignment 2/Code/
+!Assignment 2/Code/**
+
+# Specifically ignore images and PDFs within any allowed folder
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.zip
+.DS_Store
+
+# Ignore binaries and build artifacts
+*.o
+*.out
+Assignment 2/Code/Assignment2exe
+Assignment 2/Code/exercise3
+Assignment 2/Code/exercise6
+Assignment 2/Code/exercise7
+Assignment 2/Code/test
+Assignment 2/Code/test6
+Assignment 2/Code/test7
