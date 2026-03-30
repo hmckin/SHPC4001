@@ -1,38 +1,18 @@
-# Ignore everything
+# Ignore everything by default
 *
 
-# Allow the .gitignore and README files
-!.gitignore
+# Allow the root files
 !README.md
+!.gitignore
 
-# Allow Assignment 1/Code
-!Assignment 1/
-Assignment 1/*
-!Assignment 1/Code/
-!Assignment 1/Code/**
+# Allow assignment folders (and subdirectories within them)
+!Assignment_*/
+!Assignment_*/_*/
 
-# Allow Assignment 2/Code
-!Assignment 2/
-Assignment 2/*
-!Assignment 2/Code/
-!Assignment 2/Code/**
+# Inside allowed folders, only allow specific source and documentation files
+!*.c
+!*.py
+!*.md
 
-# Specifically ignore images and PDFs within any allowed folder
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.pdf
-*.zip
+# Explicitly ignore OS-specific noise
 .DS_Store
-
-# Ignore binaries and build artifacts
-*.o
-*.out
-Assignment 2/Code/Assignment2exe
-Assignment 2/Code/exercise3
-Assignment 2/Code/exercise6
-Assignment 2/Code/exercise7
-Assignment 2/Code/test
-Assignment 2/Code/test6
-Assignment 2/Code/test7
