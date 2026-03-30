@@ -70,19 +70,17 @@ def plot_convergence():
 
     # Also keep the original wavefunction plotting logic if requested
     # (Just plotting the most recent/default file)
-    latest_file = files[0] if files else None
-    if latest_file:
-        df = pd.read_csv(latest_file, comment='#')
-        plt.figure(figsize=(10, 6))
-        for i in range(4):
-            plt.plot(df['x'], df[f'psi{i}'], label=f'State $\psi_{i}$')
-        plt.xlabel('$x$')
-        plt.ylabel('$\psi(x)$')
-        plt.title(f'Wavefunctions ({latest_file})')
-        plt.legend()
-        plt.grid(True)
-        plt.savefig('schrodinger_wavefunctions.png')
-        print("Wavefunction plot saved as schrodinger_wavefunctions.png")
+    df = pd.read_csv('schrodinger_results.csv')
+    plt.figure(figsize=(10, 6))
+    for i in range(4):
+        plt.plot(df['x'], df[f'psi{i}'], label=f'State {i}')
+    plt.xlabel('$x$')
+    plt.ylabel('Wavefunction $\psi(x)$')
+    plt.title(f'Lowest 4 Energy States of the 1D Harmonic Oscillator')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig('schrodinger_wavefunctions.png')
+    print("Wavefunction plot saved as schrodinger_wavefunctions.png")
 
 if __name__ == "__main__":
     plot_convergence()

@@ -1,3 +1,14 @@
+/*
+ *  Written by: Harry McKinney Student #: 25258748
+ *  Mar 30, 2026
+ *  Assignment 3 - Question 1
+ *  Solves the Lorenz System using the 4th-order Runge-Kutta (RK4) numerical method.
+ *  To run, accepts 2 command line arguments in the form: ./lorenz [h] [output_filename]
+ *  The default is h=0.01 and filename="results.csv"
+ * 
+ *  Output is a csv.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -33,28 +44,23 @@ void rk4_step(double t, double h, double y[N],
     for (i = 0; i < N; i++) y[i] = y[i] + (h / 6.0) * (k1[i] + 2.0 * k2[i] + 2.0 * k3[i] + k4[i]);
 }
 
-double *solve(const double y0[N], double h, double t1, double t2,
-              int *num_steps_out,
-              void (*rhs)(double, const double[], double[]))
+void solve_and_write(FILE *fp, const double y0[N], double h, double t1, double t2,
+                     void (*rhs)(double, const double[], double[]))
 {
     int i, n;
     int steps = (int)((t2 - t1) / h) + 1;
-    double *y_all = malloc((size_t)steps * N * sizeof(double));
     double y[N];
     double t = t1;
 
-    if (y_all == NULL) return NULL;
     for (i = 0; i < N; i++) y[i] = y0[i];
 
     for (n = 0; n < steps; n++) {
-        for (i = 0; i < N; i++) y_all[n * N + i] = y[i];
+        fprintf(fp, "%.4f,%.8f,%.8f,%.8f\n", t, y[0], y[1], y[2]); //write to file
         if (n < steps - 1) {
             rk4_step(t, h, y, rhs);
             t += h;
         }
     }
-    *num_steps_out = steps;
-    return y_all;
 }
 
 int main(int argc, char *argv[])
@@ -67,17 +73,12 @@ int main(int argc, char *argv[])
     if (argc > 1) h = atof(argv[1]);
     if (argc > 2) filename = argv[2];
 
-    int steps;
-    double *y_all = solve(y0, h, t1, t2, &steps, f);
-    if (!y_all) return 1;
-
     FILE *fp = fopen(filename, "w");
-    if (!fp) { free(y_all); return 1; }
-    fprintf(fp, "t,x,y,z\n");
-    for (int n = 0; n < steps; n++) {
-        fprintf(fp, "%.4f,%.8f,%.8f,%.8f\n", n * h, y_all[n * N + 0], y_all[n * N + 1], y_all[n * N + 2]);
-    }
+    if (!fp) return 1;
+    
+    fprintf(fp, "t,x,y,z\n"); // header in file
+    solve_and_write(fp, y0, h, t1, t2, f);
+    printf("Successfully wrote results to %s\n", filename);
     fclose(fp);
-    free(y_all);
     return 0;
 }
