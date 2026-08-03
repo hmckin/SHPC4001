@@ -1,0 +1,15 @@
+plots/*png
+plots/*mp4
+plots/*gif
+obj/*.o
+bin/*
+docs/assignment/_minted-hpc-openmp-assignment/*
+docs/assignment/*.aux
+docs/assignment/*.log
+docs/assignment/*.out
+docs/assignment/*.pdf
+.DS_Store
+docs/.DS_Store
+nbody_common.mod
+src/nbody_common.mod
+nbody-data.txt

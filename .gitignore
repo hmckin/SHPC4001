@@ -9,10 +9,18 @@
 !Assignment_*/
 !Assignment_*/_*/
 
+# Allow project folders (and subdirectories within them)
+!Project_*/
+!Project_*/_*/
+
+# Allow top-level source of the Project_2 nbody folder (not nested tree)
+!Project_2/nbody-openmp-assignment-main/
+
 # Inside allowed folders, only allow specific source and documentation files
 !*.c
 !*.py
 !*.md
+!*.slurm
 
 # Explicitly ignore OS-specific noise
 .DS_Store
